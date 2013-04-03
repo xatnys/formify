@@ -7,10 +7,16 @@ gem 'bootstrap-sass', '2.3.0.1'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
-gem 'sqlite3'
+
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
+
+group :development, :test do
+  gem 'sqlite3'
+  gem 'rspec-rails', '2.13.0'
+  gem 'spork-rails', git: 'git://github.com/A-gen/spork-rails.git'
+end
 
 group :test do
   gem 'selenium-webdriver', '2.0'
