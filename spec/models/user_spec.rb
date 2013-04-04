@@ -28,7 +28,7 @@ describe User do
 	end
 
 	describe "password validation" do
-		it { should validate_presence_of(:password) }
+		it { expect(User.new).to validate_presence_of(:password) }
   	it { should validate_presence_of(:password_confirmation) }
   	specify { expect(user).to respond_to(:authenticate) } # from has_secure_password helper
 
