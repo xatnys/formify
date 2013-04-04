@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe User do
   
-	subject(:user) { FactoryGirl.create(:user) }
+  let(:blank_user) { User.new }
+	let(:user) { FactoryGirl.create(:user) }
   
   describe "email validation" do
 	  it { should validate_presence_of(:email) }
@@ -28,9 +29,13 @@ describe User do
 	end
 
 	describe "password validation" do
-		it { expect(User.new).to validate_presence_of(:password) }
+		
+		it { should validate_presence_of(:password) }
   	it { should validate_presence_of(:password_confirmation) }
-  	specify { expect(user).to respond_to(:authenticate) } # from has_secure_password helper
+
+  	# from has_secure_password helper
+  	it { should validate_presence_of(:password_digest) }
+  	specify { expect(user).to respond_to(:authenticate) }
 
   	it "fails when password != password_confirmation" do
   		user.password_confirmation = 'blah'

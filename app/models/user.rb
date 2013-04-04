@@ -10,9 +10,11 @@ class User < ActiveRecord::Base
 	validates :first_name, presence: true
 	validates :last_name, presence: true, length: { minimum: 2 }
 
-	validates :password, presence: true, length: { minimum: 6 }
-	validates :password_confirmation, presence: true
 	has_secure_password
+	validates :password, presence: true 
+	validates :password_confirmation, presence: true
+	validates :password_digest, presence: true
+
 
 	private
 		def new_session_token
