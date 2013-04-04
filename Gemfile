@@ -16,6 +16,9 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '2.13.0'
   gem 'spork-rails', git: 'git://github.com/A-gen/spork-rails.git'
+  gem 'guard-rspec'
+  gem 'rb-inotify'
+  gem 'libnotify'
 end
 
 group :test do
