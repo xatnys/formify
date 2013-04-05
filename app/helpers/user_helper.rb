@@ -12,6 +12,6 @@ module UserHelper
 		if arr.include?("can't be blank")
 			arr.reject! { |x| x != "can't be blank" }
 		end
-		arr
+		return arr
 	end
 end
