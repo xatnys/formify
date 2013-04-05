@@ -1,0 +1,7 @@
+<% if object && !object.empty? %>
+	<div class="errtype"><%= object.pop.capitalize %>:
+		<% object.each do |e| %>
+			<div class="errmsg"><%= e %></div>
+		<% end %>
+	</div>
+<% end %>

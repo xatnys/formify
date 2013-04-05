@@ -8,7 +8,7 @@ describe "routing" do
   end
   describe "GET /register" do
   	it 'shows users#new' do
-  		{ get: register_path }.should route_to('user#new')
+  		{ get: register_path }.should route_to('users#new')
   	end
   end
 end
