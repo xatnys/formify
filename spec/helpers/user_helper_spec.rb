@@ -11,5 +11,21 @@ require 'spec_helper'
 #   end
 # end
 describe UserHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+	describe "sensible error" do
+		let(:err_dup) { ["can't be blank","can't be blank"] }
+		let(:err_redun) { ["can't be blank","can't be blank", "invalid"] }
+		it "renders the field error partial" do
+			expect(sensible_error(err_dup, 'label')).to render_template('users/_field_error')
+		end
+
+		describe "calls error_message_sanitize" do
+
+			it "removes duplicate errors" do
+				expect(error_message_sanitize(err_dup)).to eq(["can't be blank"])
+			end
+			it "removes logically redundant validation errors" do
+				expect(error_message_sanitize(err_redun)).to eq(["can't be blank"])
+			end
+		end
+	end
 end
