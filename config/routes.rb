@@ -1,8 +1,10 @@
 Formify::Application.routes.draw do
   # get "static/home"
+  resources :sessions, only: [:create, :destroy]
   resources :users
   root to: 'static#home', via: 'get'
   get '/register' => 'users#new'
+  get '/signin' => 'sessions#new'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
