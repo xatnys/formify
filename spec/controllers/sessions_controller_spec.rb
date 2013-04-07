@@ -30,6 +30,7 @@ describe SessionsController do
 				get :new
 			end
 			it 'responds with redirect to root_path' do
+				expect(response.code).to eq('302')
 				expect(response).to redirect_to(root_path)
 			end
 
@@ -47,17 +48,34 @@ describe SessionsController do
 				cookies.delete(:token)
 				post :create, :user => test_user_params
 			end
-			it 'responds successfully' do
-				expect(response).to be_success
-				expect(response.code).to eq('200')
-			end
 			it 'holds a reference to an existing user' do
 				expect(assigns(:user).email).to eq(test_user.email)
 			end
 			it 'stores a token in cookieStore' do
 				expect(cookies[:token]).to be
 			end
-
+			it 'redirects user to root_path' do
+				expect(response.code).to eq('302')
+				expect(response).to redirect_to(root_path)
+			end
+		end
+	end
+	describe 'DELETE sessions#destroy' do
+		describe 'when not signed in' do
+			before do 
+				cookies.delete(:token)
+				delete :destroy, :id => test_user
+			end
+			it 'redirects user to root_path' do
+				expect(response.code).to eq('302')
+				expect(response).to redirect_to(root_path)
+			end
+		end
+		describe 'when signed in' do
+			before { delete :destroy, :id => test_user }
+			it 'deletes the session_token from cookieStore' do
+				expect(cookies[:token]).to be_nil
+			end
 		end
 	end
 end
