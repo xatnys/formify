@@ -14,4 +14,17 @@ module UserHelper
 		end
 		return arr
 	end
+
+	def verify_privilege( *privs )
+		if signed_in?
+			verified = true
+			privs.each do |priv|
+				verified &= current_user.__send__ priv
+			end
+		end
+		unless verified
+			redirect_to manage_path, error: "You don't have access to this function"
+		end
+	end
+
 end

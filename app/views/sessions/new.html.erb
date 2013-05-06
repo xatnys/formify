@@ -1,0 +1,24 @@
+
+<% provide(:section, 'Sign in') %>
+
+<%= form_tag sessions_path, :class => 'login-form center' do %>
+
+	
+					
+						
+							<%= text_field_tag :username, nil, :placeholder => 'Username' %>
+					
+					
+							<%= password_field_tag :password, nil, :placeholder => 'Password' %>
+					
+					
+					
+							<%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+								Submit
+							<% end %>
+					
+					
+			
+	
+	
+	<% end %>

@@ -1,10 +1,25 @@
 Formify::Application.routes.draw do
   # get "static/home"
-  resources :sessions, only: [:create, :destroy]
-  resources :users
+  
+  
   root to: 'static#home', via: 'get'
-  get '/register' => 'users#new'
-  get '/signin' => 'sessions#new'
+  
+
+  get '/manage' => 'manage#index'
+  get '/manage/admin' => 'manage#admin'
+  
+  scope '/manage' do
+    resources :sessions, only: [:create, :destroy]
+    resources :users
+    get '/login' => 'sessions#new'
+    get '/logout' => 'sessions#destroy', via: 'delete'
+    get '/profile' => 'users#edit'
+
+
+  end
+
+
+  # get '/manage' => ''
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

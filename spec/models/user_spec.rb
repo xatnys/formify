@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'bitfields/rspec'
 
 describe User do
   
@@ -6,7 +7,7 @@ describe User do
 	let(:user) { FactoryGirl.create(:user) }
   
 	describe 'username validation' do
-		it { should_validate_presence_of(:username) }
+		it { should validate_presence_of(:username) }
 	end
 
 
@@ -47,15 +48,19 @@ describe User do
   	it "fails when password != password_confirmation" do
   		user.password_confirmation = 'blah'
   		expect(user).to be_invalid
-  	end
+  	end		
   end
 
   describe "session_token upon creation" do
   	specify { expect(user.session_token).to be }
   end
 
-  it "can be an admin" do
-  	expect(FactoryGirl.create(:admin)).to be_admin
+  # it "can be an admin" do
+  # 	expect(FactoryGirl.create(:admin)).to be_admin
+  # end
+
+  it "has a priveliges bitfield column" do
+  	should respond_to(:privileges)
   end
 
   describe "reponds to a privilege bitfields" do
@@ -64,7 +69,7 @@ describe User do
   	it { should have_a_bitfield :priv_add_cust_phone }
   	it { should have_a_bitfield :priv_add_cust_kiosk }
   	it { should have_a_bitfield :priv_view_cust }
-  	it [ should have_a_bitfield :priv_edit_cust ]
+  	it { should have_a_bitfield :priv_edit_cust }
   	it { should have_a_bitfield :priv_search_cust }
   end
 end

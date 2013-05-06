@@ -1,0 +1,56 @@
+
+	<div class="span9 well">
+	
+		<div class="row">
+			<div class="span9">
+				<h3>All Users</h3>
+			</div>
+		</div>	
+		
+		<div class="row">
+			<div class="span9">
+				
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>User ID</th>
+							<th>Last Name</th>
+							<th>First Name</th>
+							<th>Username</th>
+							<th>Add users?</th>
+							<th>Add enrollees?</th>
+							<th>Edit enrollees?</th>
+						</tr>
+					</thead>
+					<% @users.each do |u| %>
+					<tr>
+						<td><%= u.id %></td>
+						<td><%= u.last_name.upcase %></td>
+						<td><%= u.first_name %></td>
+						<td><%= u.username %></td>
+						<td class="icon">
+							<% if u.priv_manage_ops %>
+								<i class="icon-ok"></i>
+							<% end %>
+						</td>
+						<td class="icon">
+							<% if u.priv_add_cust_email | u.priv_add_cust_phone | u.priv_add_cust_kiosk %>
+								<i class="icon-ok"></i>
+							<% end %>
+						</td>
+						<td class="icon">
+							<% if u.priv_edit_cust %>
+								<i class="icon-ok"></i>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>	
+				</table>
+			
+			</div>
+		</div>
+		
+
+	
+	
+	</div>

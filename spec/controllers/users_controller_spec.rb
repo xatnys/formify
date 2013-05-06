@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe UsersController do
+	let(:admin) { FactoryGirl.create(:admin) }
+	before { cookies[:token] = admin.session_token }
+	
 	describe 'GET user#new' do
+
 		before { get :new }
 		it "responds successfully" do
 			expect(response).to be_success
@@ -18,13 +22,13 @@ describe UsersController do
 	end
 
 	describe 'POST user#create' do
-		before { User.delete_all }
 		describe "with valid information" do
 			let :params do
-				{ :email => 'foo@bar.com', 
+				{ :username => 'foo', 
 					:password => 'foobar', 
 					:password_confirmation => 'foobar',
-					:first_name => 'Fizz',	:last_name => 'Buzz' }
+					:first_name => 'Fizz',	:last_name => 'Buzz', 
+					:priv_view_cust => true }
 				
 			end
 

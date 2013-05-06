@@ -6,16 +6,19 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@user = User.find_by(email: params[:user][:email])
-		if @user.authenticate(params[:user][:password])
+		@user = User.find_by(username: params[:username])
+		pw = params[:password]
+		if @user.authenticate(pw)
 			sign_in @user
-			redirect_to root_path
+			redirect_to manage_path
+		else
+			render :new
 		end
 	end
 
 	def destroy
 		if signed_in?
-			signout_user
+			sign_out
 		end
 		redirect_to root_path
 	end

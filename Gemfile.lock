@@ -5,6 +5,14 @@ GIT
     spork-rails (3.2.1)
       spork (>= 1.0rc0)
 
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: deec6e034c27d88f082c69505c17adf933d1d0b3
+  branch: 3
+  specs:
+    bootstrap-sass (2.3.1.0)
+      sass (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,8 +43,7 @@ GEM
     arel (4.0.0.beta2)
     atomic (1.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.3.0.1)
-      sass (~> 3.2)
+    bitfields (0.4.2)
     bourne (1.4.0)
       mocha (~> 0.13.2)
     builder (3.1.4)
@@ -68,6 +75,8 @@ GEM
     faker (1.1.2)
       i18n (~> 0.5)
     ffi (1.6.0)
+    font-awesome-rails (3.0.2.0)
+      railties (>= 3.1)
     guard (1.6.2)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -195,11 +204,13 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
-  bootstrap-sass (= 2.3.0.1)
+  bitfields
+  bootstrap-sass!
   capybara (= 2.1.0.beta1)
   coffee-rails (~> 4.0.0.beta1)
   factory_girl_rails (= 4.2.0)
   faker (= 1.1.2)
+  font-awesome-rails
   guard-rspec
   jbuilder (~> 1.0.1)
   jquery-rails

@@ -7,8 +7,57 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="navbar navbar-inverse navbar-fixed-top <% if content_for?(:section) %>with-head<% end %>">
+		<div class="navbar-inner">
+			<div class="container">
+				<button class="btn btn-navbar collapsed" data-target=".nav-collapse" data-toggle="collapse" type="button">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="nav-collapse collapse">
 
-<%= yield %>
+			<ul class="nav">
+				<% if !signed_in? %>
+					<li class="home"><a href="<%= url_for root_path %>"><i class="icon-home icon-large"></i> Home</a></li>
+					<li><a href="<%= url_for manage_path %>"><i class="icon-key icon-large"></i> Sign in</a></li>
+				<% else %>
+					<li class="home"><a href="<%= url_for manage_path %>"><i class="icon-home icon-large"></i></a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> <%= current_user.username %> <b class="caret"></b></a> 
+						<ul class="dropdown-menu">
+							<%= content_tag(:li,link_to("Sign out", session_path(current_user),:method => :delete)) %>
+						</ul>
+					</li>
+					<% if current_user.admin? | current_user.priv_manage_ops %>
+						<li><a href="<%= url_for manage_admin_path %>"><i class="icon-cog icon-large"></i> Administrate</a></li>
+					<% end %>
+				<% end %>
+			</ul>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<% if content_for?(:section) %>
+		<div class="section-head">
+			
+			<h2><%= yield(:section) %></h2>
+			
+		</div>
+	<% end %>
 
+	<div class="section-body container">
+		<%= yield %>
+	</div>
+
+
+	<% if Rails.env.development? %>
+		<div class="container">
+	    <%= debug(params) %>
+	    </div>
+		</div>
+	<% end %>
 </body>
 </html>

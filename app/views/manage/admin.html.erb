@@ -1,0 +1,28 @@
+<% provide(:section, "administrative settings") %>
+<div class="row">
+	<div class="span3 menu" >
+		<ul class="nav nav-list aftarg">
+			<% if current_user.priv_manage_ops %>
+			<li class="nav-header">Manage users</li>
+			<li><a href="#">Add new user <i class="icon-angle-right icon-large pull-right"></i></a></li>
+			<li><a href="#">All users</a></li>
+			<% end %>
+			<% if current_user.admin? %>
+			<li class="nav-header">Manage system</li>
+			<li><a href="#">Database settings</a></li>
+			<% end %>
+		</ul>
+	</div>
+	
+	<div class="span9">
+		<div class="row">
+			<%= render 'users/user_form' %>
+		</div>
+		<div class="row">
+			<%= render 'users/user_list' %>
+		</div>
+	</div>
+	
+
+	
+</div>

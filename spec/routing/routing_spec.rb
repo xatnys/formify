@@ -2,13 +2,18 @@ require 'spec_helper'
 
 describe "routing" do
   describe "GET /" do
-    it "shows static#home" do
- 			{ get: root_path }.should route_to('static#home')
-    end
+    specify { { get: '/' }.should route_to('static#home') }
   end
-  describe "GET /register" do
-  	it 'shows users#new' do
-  		{ get: register_path }.should route_to('users#new')
-  	end
+
+  describe "GET /manage/users/new" do
+ 		specify { { get: '/manage/users/new' }.should route_to('users#new') }
+  end
+
+  describe "GET /manage/profile" do
+  	specify { { get: '/manage/profile' }.should route_to('users#edit') }
+  end
+
+  describe "GET /manage" do
+  	specify { { get: '/manage' }.should route_to('manage#index') }
   end
 end

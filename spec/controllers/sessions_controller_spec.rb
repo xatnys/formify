@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SessionsController do
 	let(:test_user) { FactoryGirl.create(:user) }
-	let(:test_user_params) { { :email => test_user.email, :password => test_user.password } }
+	let(:test_user_params) { { :username => test_user.username, :password => test_user.password } }
 	let(:cookie_params) { { :value => test_user.session_token, :expires => 1.hour.from_now } }
 	describe 'GET sessions#new' do
 		describe "when not signed in" do
@@ -29,9 +29,9 @@ describe SessionsController do
 				cookies[:token] = cookie_params
 				get :new
 			end
-			it 'responds with redirect to root_path' do
+			it 'responds with redirect to manage_path' do
 				expect(response.code).to eq('302')
-				expect(response).to redirect_to(root_path)
+				expect(response).to redirect_to(manage_path)
 			end
 
 			it 'determines current_user to exist' do
@@ -46,17 +46,17 @@ describe SessionsController do
 		describe 'when not signed in' do
 			before do
 				cookies.delete(:token)
-				post :create, :user => test_user_params
+				post :create, test_user_params
 			end
 			it 'holds a reference to an existing user' do
-				expect(assigns(:user).email).to eq(test_user.email)
+				expect(assigns(:user).username).to eq(test_user.username)
 			end
 			it 'stores a token in cookieStore' do
 				expect(cookies[:token]).to be
 			end
-			it 'redirects user to root_path' do
+			it 'redirects user to manage_path' do
 				expect(response.code).to eq('302')
-				expect(response).to redirect_to(root_path)
+				expect(response).to redirect_to(manage_path)
 			end
 		end
 	end

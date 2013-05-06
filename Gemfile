@@ -3,7 +3,9 @@ ruby '2.0.0'
 
 #global
 gem 'rails', '4.0.0.beta1'
-gem 'bootstrap-sass', '2.3.0.1'
+# gem 'bootstrap-sass', '2.3.0.1'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
+gem 'font-awesome-rails'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
@@ -11,6 +13,7 @@ gem 'will_paginate', '3.0.4'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
+gem 'bitfields'
 
 group :development, :test do
   gem 'sqlite3'

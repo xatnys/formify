@@ -1,0 +1,108 @@
+
+<div class="user-form">
+	<div class="span9 well">
+		
+		<div class="row">
+			<div class="span9">
+				<h3>New user</h3>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<%= form_for @user do |f| %>
+			<div class="span6">
+				<div class="form-horizontal">
+					<div class="control-group">
+						<%= f.label :username, nil, :class => 'control-label' %>
+						<div class="controls">
+							<%= f.text_field :username %>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<%= f.label :password, nil, :class => 'control-label' %>
+						<div class="controls">
+							<%= f.password_field :password %>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<%= f.label :password_confirmation, "Confirm Password", :class => 'control-label' %>
+						<div class="controls">
+							<%= f.password_field :password_confirmation %>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<%= f.label :first_name, nil, :class => 'control-label' %>
+						<div class="controls">
+							<%= f.text_field :first_name %>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<%= f.label :last_name, nil, :class => 'control-label' %>
+						<div class="controls">
+							<%= f.text_field :last_name %>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="span3 privs">
+				<span>Privileges</span>
+				<ul>
+					<li>
+						<%= f.check_box :priv_manage_ops %>
+						<%= f.label :priv_manage_ops, 'Manage users', :class => 'checkbox inline' %>
+					</li>
+					<li>
+						<%= f.check_box :priv_view_cust %>
+						<%= f.label :priv_view_cust, 'View enrollees', :class => 'checkbox inline' %>
+					</li>
+					<li>
+						<%= f.check_box :priv_search_cust %>
+						<%= f.label :priv_search_cust, 'Search enrollees', :class => 'checkbox inline' %>
+					</li>
+					<li class="add">
+						<span>Add enrollees:</span>
+						<ul>
+							<li>
+						<%= f.check_box :priv_add_cust_email %>
+						<%= f.label :priv_add_cust_email, 'by e-mail', :class => 'checkbox inline' %>
+					</li>
+					<li>
+						<%= f.check_box :priv_add_cust_phone %>
+						<%= f.label :priv_add_cust_phone, 'by phone', :class => 'checkbox inline' %>
+					</li>
+					<li>
+						<%= f.check_box :priv_add_cust_kiosk %>
+						<%= f.label :priv_add_cust_kiosk, 'from kiosk queue', :class => 'checkbox inline' %>
+					</li>
+						</ul>
+					</li>
+					<li>
+						<%= f.check_box :priv_edit_cust %>
+						<%= f.label :priv_edit_cust, 'Edit enrollees', :class => 'checkbox inline' %>
+					</li>
+				</ul>
+			</div>
+
+
+		</div>
+
+		<div class="row">
+			<div class="span9">
+				<%= button_tag(type: 'submit', class: "btn btn-primary btn-large pull-right") do %>
+					<i class="icon-plus"></i> Add user
+				<% end %>
+				<% end %>		
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
