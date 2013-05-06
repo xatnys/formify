@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+
+	include ActiveModel::Validations
+	class UserValidator < ActiveModel::EachValidator
+		def validate_each(record, attribute, value)
+			record.errors.add attribute, "cannot start with numbers and - or _" unless value =~ /\A[^-_\d]?/i
+			record.errors.add attribute, "must be alphanumeric" unless value =~ /[a-zA-Z\d_-]+/i
+		end
+	end
 	
 	def self.priv_list
 		{ 1 => :priv_manage_ops, 
@@ -19,10 +27,12 @@ class User < ActiveRecord::Base
 	# EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	# validates :email, presence: true, format: { with: EMAIL_REGEX }, 
 	# 	uniqueness: { case_sensitive: false }
-	validates :username, presence: true
+	validates :username, presence: true, 
+		uniqueness: true,
+		:user => true
 
 	validates :first_name, presence: true
-	validates :last_name, presence: true, length: { minimum: 2 }
+	validates :last_name, presence: true
 
 	has_secure_password
 	validates :password, presence:true, length: { minimum: 5 }
