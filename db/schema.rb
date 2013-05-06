@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130421063309) do
+ActiveRecord::Schema.define(version: 20130506080701) do
+
+  create_table "parents", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "email"
+    t.string   "addr"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip",        limit: 12
+    t.integer  "reg_method", limit: 1
+    t.boolean  "confirmed?",            default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "phone_id"
+  end
+
+  add_index "parents", ["phone_id"], name: "index_parents_on_phone_id"
+  add_index "parents", ["reg_method"], name: "index_parents_on_reg_method"
+
+  create_table "phones", force: true do |t|
+    t.integer  "parent_id"
+    t.string   "number"
+    t.integer  "phone_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "phones", ["parent_id"], name: "index_phones_on_parent_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
