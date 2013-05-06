@@ -17,7 +17,7 @@ class Parent < ActiveRecord::Base
 
 	validates :first_name, presence: true
 	validates :last_name, presence: true
-	validates :title, :inclusion => { :in => %w(mr mrs ms sr)}
+	validates :title, :inclusion => { :in => %w(mr mrs ms sr) }
 	# require at least 1 phone number
 	validates :phones, :presence => true
 
@@ -31,9 +31,17 @@ class Parent < ActiveRecord::Base
 	validates :state, presence: true
 	validates :zip, presence: true, limit: { maximum: 12 }
 
-	REG_METHODS = [ RegMethod::FROM_SYSTEM RegMethod::FROM_PHONE RegMethod::FROM_EMAIL RegMethod::FROM_KIOSK ]
+	REG_METHODS = [ 
+		RegMethod::FROM_SYSTEM 
+		RegMethod::FROM_PHONE 
+		RegMethod::FROM_EMAIL 
+		RegMethod::FROM_KIOSK 
+	]
 	validates :reg_method, presence: true, 
-		:inclusion => { :in => REG_METHODS, :message => "%{value} is not a valid registration method." }
+		:inclusion => { 
+			:in => REG_METHODS, 
+			:message => "%{value} is not a valid registration method." 
+		}
 
 	validates :is_confirmed, presence: true, :inclusion { :in => [ true false ] }
 

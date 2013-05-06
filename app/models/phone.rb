@@ -13,6 +13,10 @@ class Phone < ActiveRecord::Base
 
   PHONE_TYPES = [ PhoneType::HOME PhoneType::MOBILE PhoneType::WORK ]
   validates :phone_type, presence: true, 
-  	:inclusion => { :in => PHONE_TYPES, :message => "invalid phone type (expected home, mobile, or work)" }
+  	:inclusion => { 
+  		:in => PHONE_TYPES, 
+  		:message => "invalid phone type (expected home, mobile, or work)" 
+  	}
+
   	
 end
