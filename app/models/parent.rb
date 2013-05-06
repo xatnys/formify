@@ -35,5 +35,6 @@ class Parent < ActiveRecord::Base
 	validates :reg_method, presence: true, 
 		:inclusion => { :in => REG_METHODS, :message => "%{value} is not a valid registration method." }
 
+	validates :is_confirmed, presence: true, :inclusion { :in => [ true false ] }
 
 end

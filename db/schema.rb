@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130506080701) do
+ActiveRecord::Schema.define(version: 20130506144311) do
 
   create_table "parents", force: true do |t|
     t.string   "first_name"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20130506080701) do
     t.string   "addr"
     t.string   "city"
     t.string   "state"
-    t.integer  "zip",        limit: 12
-    t.integer  "reg_method", limit: 1
-    t.boolean  "confirmed?",            default: true
+    t.integer  "zip",          limit: 12
+    t.integer  "reg_method",   limit: 1
+    t.boolean  "is_confirmed",            default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "phone_id"
