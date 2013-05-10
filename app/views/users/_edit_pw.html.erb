@@ -1,9 +1,27 @@
+<% provide(:section, "first time login") %>
+
+<div class="alert alert-info">
+	<strong>Welcome!</strong> You're logging in using the default admin account. For security purposes the default password must be changed. You will be unable to perform any actions until the default password is changed.
+</div>
+<div class="span6 center">
+<%= render '/shared/errors', obj: @user %>
+</div>
 <%= form_for(@user) do |f| %>
-<%= f.label :password %>
-<%= f.password_field :password %>
+<div class="span4 basewell center">
 
-<%= f.label :password_confirmation, "Confirm Password" %>
-<%= f.password_field :password_confirmation %>
+	
+	<div class="controls">
+		<%= f.label :password %>
+		<%= f.password_field :password, :class => "span4" %>
 
-<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+		<%= f.label :password_confirmation, "Confirm Password" %>
+		<%= f.password_field :password_confirmation, :class => "span4" %>
+		
+	</div>
+	<div class="row basewell-foot">
+		<div class="span4">
+			<%= f.submit "Save changes", class: "btn btn-primary pull-right" %>
+		</div>
+	</div>
+</div>
 <% end %>

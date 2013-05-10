@@ -8,10 +8,10 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			redirect_to users_path
+			redirect_to manage_admin_path
 		else
 			@users = User.all unless defined?(@users)
-			render :index
+			render :template => 'manage/admin', :locals => { users: @users }
 		end
 	end
 

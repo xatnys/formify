@@ -18,10 +18,41 @@ body {
 	background-color: lighten($blueMain,84%);
 }
 
-.well { 
-	padding-top: 0;
+.basewell { 
+	@extend .well;
+	box-shadow: none;
 	border-radius: 0px; 
-	box-shadow: none; 
+	box-shadow: 0 5px 10px lighten(black,90%), inset 0px 1px 0px white;
+	padding-bottom: 0;
+	> form { margin-bottom: 0;}
+	&.delegation { 
+		padding-top: 0px;
+		padding-left: 14px;
+		padding-bottom: 18px;
+
+	}
+	// > :last-child { margin-bottom: 18px; }
+	.basewell-head {
+		border-bottom: 1px solid white;
+		box-shadow: inset 0px -12px 7px -12px #aaa;
+		background-color: desaturate(lighten($blueMain,20%), 60%);
+		margin: 18px -18px 18px -18px;
+		&:first-of-type { margin-top: -18px; }
+		color: white;
+		> div { 
+			margin-left: 15px; 
+			@extend h4;
+		}
+	}
+	
+	.basewell-foot {
+		background-color: darken(whitesmoke,5%);
+		margin: 18px -18px 1px -18px;
+		padding: 10px 0px 10px 0px;
+		border-top: 1px solid white;
+		box-shadow: inset 0px 12px 7px -12px #aaa;
+		.span1,.span5,.span6 { margin-left: 15px;}
+	}
 }
 
 
@@ -31,6 +62,11 @@ body {
 	.affix {
 		top: 60px;
 		width: inherit;
+
+		@media (max-width: 767px) {
+			top: 0px;
+			position: relative;
+		}
 	}
 	@media (max-width: 767px) {
 		margin-top: -20px;
@@ -61,11 +97,13 @@ body {
 		}
 	}
 }
-input[type='text'], input[type='password'] {
-	width: 400px;
-	max-width: calc(100% - 14px);
-}
-.navbar-inverse, input[type='text'], input[type='password'] { font-size: 13px; }
+
+.navbar-inverse, 
+input[type='text'], 
+input[type='password'], 
+input[type='email'],
+input[type='tel'],
+select { font-size: 13px; }
 
 .navbar-inverse {
 	
@@ -119,14 +157,30 @@ input[type='text'], input[type='password'] {
 	}	
 }
 
+.add-quick-menu {
+	top: -7px;
+	position: absolute;
+	z-index: 1031;
+	width: 220px;
+	left: calc(50% - 110px);
+	text-align: center;
+	div { 
+		display: inline-block;
+		background-color: desaturate(lighten($blueMain,30%),40%);
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		padding: 6px 2px 2px 2px;
+	}
+}
+
 .section-head {
 	font-family: 'Ubuntu Light';
-	box-shadow: inset 0px -12px 7px -12px #aaa;
 	background-color: lighten($blueMain,80%);
 	padding-left: 0;
 	padding-right: 0;
 	border-bottom: 1px solid white;
-	h2 {
+	box-shadow: inset 0px -12px 7px -12px #aaa;
+	h2, h3 {
 		margin-bottom: 0;
 		margin-top: 0;
 		padding: 8px 20px;
@@ -165,6 +219,11 @@ input[type='text'], input[type='password'] {
 			background-color: $blueMain;	
 		}
 	}
+
+	input[type='text'], input[type='password'] {
+		width: 400px;
+		max-width: calc(100% - 14px);
+	}
 }
 .user-form {
 	// .well { padding-top: 0px; }
@@ -182,6 +241,77 @@ input[type='text'], input[type='password'] {
 		span, ul { padding-left: 0;}
 		
 	}
+	input[type='text'], input[type='password'] {
+		width: 400px;
+		max-width: calc(100% - 14px);
+	}
 }
 
+form.new_parent {
 
+}
+.addphone, .addchild { 
+	// @extend .pull-right;
+	@extend .span4;
+	@extend .btn;
+	@extend .btn-info;
+	@extend .btn-small;
+	width: auto;
+	margin-bottom: 10px;
+}
+.phone_fieldset {
+	&:first-of-type {
+		select { width: 100%; max-width: 100%;}
+		.removephone { display: none; }
+	}
+	select {
+		width: 100%;
+		max-width: calc(100% - 64px);
+		@media (max-width: 1199px) {
+			max-width: calc(100% - 56px);	
+		}
+		@media (max-width: 768px) {
+			max-width: calc(100% - 42px);	
+		}
+		
+	}
+}
+.removephone, .removechild {
+	@extend .btn;
+	@extend .btn-danger;
+	@extend .btn-small;
+	padding: 3px 12px 4px 12px;
+	margin-bottom: 10px;
+	margin-left: 28px;
+	@media (min-width: 768px) and (max-width: 1199px) { 
+		margin-left: 18px;
+	}
+	
+	@media (max-width: 767px) {
+		margin-left: 6px;
+	}
+	
+	width: auto;	
+}
+
+.child_fieldset {
+	select {
+		width: 116px;
+		max-width: calc(100% - 64px);
+		@media (max-width: 1199px) {
+			max-width: calc(100% - 56px);	
+
+		}
+		@media (max-width: 768px) {
+			max-width: calc(100% - 42px);	
+		}
+		
+	}
+	box-shadow: 0 1px 0 lighten(black,80%);
+	margin-bottom: 10px;
+}
+.dashtabs {
+	.active {
+		border-bottom: 1px solid red;
+	}
+}

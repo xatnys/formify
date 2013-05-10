@@ -1,0 +1,41 @@
+<%= form_for @parent do |f| %>
+<%= f.hidden_field :reg_method, :value => Parent::FROM_KIOSK %>
+<div class="span12">
+	<%= f.label :first_name %>
+	<%= f.text_field :first_name %>
+
+	<%= f.label :last_name %>
+	<%= f.text_field :last_name %>
+
+	<%= f.label :addr, "Address" %>
+	<%= f.text_field :addr %>
+
+	<%= f.label :city %>
+	<%= f.text_field :city %>
+
+	<%= f.label :state %>
+	<%= f.text_field :state %>
+
+	<%= f.label :zip %>
+	<%= f.number_field :zip %>
+
+	<%= f.label :email %>
+	<%= f.email_field :email %>
+
+	<p>Phones</p>
+	<%= f.fields_for :phones do |x| %>
+		<%= render 'phone_fields', f: x %>
+		<%= link_to_add_fields "Add another phone", f, :phones %>
+	<% end %>
+	
+	<p>Children</p>
+	<%= f.fields_for :children do |c| %>
+		<%= render 'child_fields', f: c %>
+		<%= link_to_add_fields "Add another child", f, :children %>
+	<% end %>
+	
+	<%= button_tag(type: 'submit', class: "btn btn-primary pull-right") do %>
+		<i class="icon-plus"></i> Submit
+	<% end %>
+</div>
+<% end %>

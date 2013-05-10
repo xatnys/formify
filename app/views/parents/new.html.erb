@@ -1,0 +1,12 @@
+<div class="row">
+<%= 
+	case @method.to_i
+	when Parent::FROM_SYSTEM
+		provide(:section, 'robots')
+	when Parent::FROM_PHONE
+		render 'new_phone'
+	else
+		provide(:section,'default')
+	end
+%>
+</div>

@@ -1,0 +1,12 @@
+<fieldset class="phone_fieldset controls controls-row">
+	
+		<%= f.telephone_field :number, :class => "span3", :placeholder => "(xxx) xxx-xxxx" %>
+		
+		<div class="span3">
+			<%= f.select :phone_type, Phone.PhoneTypes, { :prompt => "Phone type" } %>
+			<%= f.hidden_field :_destroy %>
+			<%= link_to "x", '#', class: "remove_fields removephone" %>	
+		</div>
+	
+
+</fieldset>	

@@ -1,0 +1,78 @@
+<% provide(:section, "Phone Inquiry") %>
+<%= form_for @parent do |f| %>
+	<div class="row">
+		<div class="span9 center">
+			<%= render 'shared/errors', obj: @parent %>
+		</div>
+	</div>
+	<%= f.hidden_field :reg_method, :value => Parent::FROM_PHONE %>
+	<div class="row">
+	<div class="span6 basewell">
+		<div class="row basewell-head">
+			<div class="span6">Basic information</div>
+		</div>
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name, :placeholder => "first name", :class => "span6" %>
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name, :placeholder => "last name", :class => "span6" %>
+		<%= f.label :addr, "Address" %>
+		<%= f.text_field :addr, :placeholder => "street address", :class => "span6"  %>
+		
+		<%= text_field_tag "parent[csz]", @csz, :placeholder => "city, state, zip", :class => "span6" %>
+		
+		<div class="row basewell-head">
+			<div class="span6">Contact information</div>
+		</div>
+		<%= f.label :email %> 
+		<%= f.email_field :email, :placeholder => "email", :class => "span6" %>
+			
+		
+		<%= label :number, "Phone number(s)" %>
+		
+		
+		<%= f.fields_for :phones do |x| %>
+			
+			<%= render 'phone_fields', f: x %>
+			<%= link_to_add_fields "Add Phone", f, :phones %>
+		<% end %>
+		
+		
+				
+			
+		<div class="row basewell-head">
+			<div class="span6">Schedule a tour</div>
+		</div>
+		<fieldset class="tour_date controls controls-row">
+			<%= f.label :tour_date %>
+			<%= f.date_select :tour_date, { :default => nil, :start_year => Time.now.year, :prompt => [:year, :month, :day] }, { :class => "span2" } %>
+			<%= label :tour_time, "Tour time" %>
+			<%= f.time_select :tour_date, { :ampm => true, :minute_step => 15, :time_separator => '', :ignore_date => true, :prompt => {:hour => "HH", :minute => "MM"}  } %>
+		</fieldset>
+
+		<div class="row basewell-foot">
+			<div class="span6">
+			<%= button_tag(type: 'submit', class: "btn btn-primary pull-right") do %>
+						<i class="icon-plus"></i> Complete inquiry
+			<% end %>
+			</div>
+		</div>
+	</div>
+
+		<div class="span5 basewell">
+			<div class="row basewell-head">
+				<div class="span5">Children</div>
+			</div>
+			<div class="row">
+				<div class="span5">
+			<%= f.fields_for :children do |c| %>
+				<%= render 'child_fields', f: c %>
+				<%= link_to_add_fields "Add Child", f, :children %>
+				</div>
+			<% end %>
+			</div>
+			<div class="span5">
+				
+			</div>
+		</div>
+	</div>
+<% end %>

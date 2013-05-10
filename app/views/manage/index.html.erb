@@ -1,1 +1,58 @@
 <% provide(:section,'Dashboard') %>
+<div class="row">
+	
+	<div class="span12">
+		<div class="row">
+			<div class="span12">
+				Welcome, <%= current_user.first_name %>!
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+			<ul class="nav nav-tabs dashtabs">
+				<li class="active">
+					<a href="#">
+						Pending delegations <%= content_tag :span, current_user.delegations.incomplete.count, :class => "badge badge-info" %>
+					</a>
+				</li>
+			</ul>
+			</div>
+		</div>
+		<div class="row">
+		<% current_user.delegations.incomplete.all.each do |delegation| %>
+			<% @p =  Parent.find(delegation.parent_id) %>
+			<div class="span12 basewell delegation">
+				<div class="row">
+					<div class="span12">
+					<h4><%= "#{@p.first_name} #{@p.last_name}" %></h4>
+					</div>
+				</div>
+				<div class="row">
+				<div class="span3">	
+					
+					Address<br>
+					<%= @p.addr %> <br>
+					<%= "#{@p.city}, #{@p.state}, #{@p.zip}" %> <br>
+					
+				</div>
+				<div class="span3">
+					Phones:<br>
+					<% @p.phones.all.each do |phone| %>
+					<%= "#{phone.number} (#{Phone.resolve_type(phone.phone_type)})" %><br>
+					<% end %>
+				</div>
+				</div>
+				<div class="row">
+				<%= form_for @p do |f| %>
+					<%= hidden_field_tag "delegation_id", delegation.id %>
+					<%= f.hidden_field :confirmed_status, :value => Parent::CONFIRM_CONFIRMED %>
+					<%= f.submit "Confirm parent", :class => "btn btn-primary pull-right" %>
+				<% end %>
+				</div>
+			</div>
+		<% end %>
+		</div>
+	</div>
+
+
+</div>

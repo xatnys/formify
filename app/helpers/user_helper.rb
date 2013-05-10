@@ -15,6 +15,18 @@ module UserHelper
 		return arr
 	end
 
+	def error_sanitize_all(errors)
+		full_msgs = []
+		errors.keys().each do |key|
+			arr = error_message_sanitize(errors[key])
+			key = key.to_s.gsub('.', '_').humanize
+			arr.each do |msg|
+				full_msgs.push("#{key} #{msg}")
+			end
+		end
+		return full_msgs
+	end
+
 	def verify_privilege( *privs )
 		if signed_in?
 			verified = true

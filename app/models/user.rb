@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
 	validates :password_confirmation, presence: true
 	validates :password_digest, presence: true
 
+	has_many :delegations
+	
 
 	private
 		def new_session_token

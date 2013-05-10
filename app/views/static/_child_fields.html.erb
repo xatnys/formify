@@ -1,0 +1,17 @@
+<fieldset class="child_fieldset controls">
+	<div class="row">
+	<div class="span12">
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name, :class => "span5", :placeholder => "first name" %>
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name, :class => "span5", :placeholder => "last name" %>
+		<%= f.label :birth_date %>
+		<div class="controls-row">
+		<%= f.date_select :birth_date, { :default => nil, :prompt => [:year, :month, :day] }, { :class => "span2" } %>
+		<%= f.hidden_field :_destroy %>
+		<%= link_to "x", '#', class: "remove_fields removechild" %>	
+		</div>
+	</div>
+	
+</div>	
+</fieldset>	

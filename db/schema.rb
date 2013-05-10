@@ -11,25 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130506144311) do
+ActiveRecord::Schema.define(version: 20130510035649) do
+
+  create_table "children", force: true do |t|
+    t.integer  "parent_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "birth_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "children", ["parent_id"], name: "index_children_on_parent_id"
+
+  create_table "delegations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.boolean  "status",     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delegations", ["user_id"], name: "index_delegations_on_user_id"
 
   create_table "parents", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "title"
+    t.string   "title",                       default: "none"
     t.string   "email"
     t.string   "addr"
     t.string   "city"
     t.string   "state"
-    t.integer  "zip",          limit: 12
-    t.integer  "reg_method",   limit: 1
-    t.boolean  "is_confirmed",            default: true
+    t.integer  "zip",              limit: 12
+    t.integer  "reg_method",       limit: 1
+    t.integer  "confirmed_status",            default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "phone_id"
+    t.datetime "tour_date"
   end
 
-  add_index "parents", ["phone_id"], name: "index_parents_on_phone_id"
   add_index "parents", ["reg_method"], name: "index_parents_on_reg_method"
 
   create_table "phones", force: true do |t|

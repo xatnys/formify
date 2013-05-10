@@ -1,16 +1,18 @@
 
 <div class="user-form">
-	<div class="span9 well">
+	<%= form_for @user do |f| %>
+
+	<div class="span9 basewell">
 		
-		<div class="row">
+		<div class="row basewell-head">
 			<div class="span9">
-				<h3>New user</h3>
+				New user
 			</div>
 		</div>
-
+		<%= render 'shared/errors', obj: @user %>
 		<div class="row">
 
-			<%= form_for @user do |f| %>
+			
 			<div class="span6">
 				<div class="form-horizontal">
 					<div class="control-group">
@@ -92,7 +94,7 @@
 
 		</div>
 
-		<div class="row">
+		<div class="row basewell-foot">
 			<div class="span9">
 				<%= button_tag(type: 'submit', class: "btn btn-primary btn-large pull-right") do %>
 					<i class="icon-plus"></i> Add user

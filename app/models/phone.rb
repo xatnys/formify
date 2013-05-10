@@ -1,17 +1,22 @@
 class Phone < ActiveRecord::Base
 
-	module PhoneType
-		HOME = 0
-		MOBILE = 1
-		WORK = 2
-	end
+	HOME = 1
+	MOBILE = 2
+	WORK = 3
 
-  has_one :parent, :inverse_of => :phone
+  def self.PhoneTypes
+    { "Home" => HOME, "Mobile" => MOBILE, "Work" => WORK }
+  end
 
-  validates :parent, presence: true
+  def self.resolve_type(type)
+    types = Phone.PhoneTypes.invert
+    return types[type]
+  end
+  belongs_to :parent
+
   validates :number, presence: true, length: { minimum: 7 }
 
-  PHONE_TYPES = [ PhoneType::HOME PhoneType::MOBILE PhoneType::WORK ]
+  PHONE_TYPES = [ HOME, MOBILE, WORK ]
   validates :phone_type, presence: true, 
   	:inclusion => { 
   		:in => PHONE_TYPES, 

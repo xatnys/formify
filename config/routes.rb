@@ -1,7 +1,4 @@
-Formify::Application.routes.draw do
-  # get "static/home"
-  
-  
+Formify::Application.routes.draw do 
   root to: 'static#home', via: 'get'
   
 
@@ -11,11 +8,12 @@ Formify::Application.routes.draw do
   scope '/manage' do
     resources :sessions, only: [:create, :destroy]
     resources :users
+    resources :parents, only: [:create, :destroy, :update]
     get '/login' => 'sessions#new'
     get '/logout' => 'sessions#destroy', via: 'delete'
     get '/profile' => 'users#edit'
-
-
+    get '/parents/new/phone' => 'parents#new', :method => Parent::FROM_PHONE.to_s
+    
   end
 
 

@@ -7,11 +7,12 @@ class SessionsController < ApplicationController
 
 	def create
 		@user = User.find_by(username: params[:username])
-		pw = params[:password]
-		if @user.authenticate(pw)
+		
+		if @user && @user.authenticate(params[:password])
 			sign_in @user
 			redirect_to manage_path
 		else
+			flash[:error] = "Error: unrecognized username or password."
 			render :new
 		end
 	end
